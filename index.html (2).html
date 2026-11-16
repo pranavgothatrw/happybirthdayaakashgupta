@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Happy Birthday, Aakash Gupta 🎉</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --green: #1DB954;
+    --green-dark: #148A3D;
+    --green-glow: rgba(29, 185, 84, 0.18);
+    --green-light: #d4f5e1;
+    --black: #0a0f0a;
+    --surface: #101810;
+    --surface2: #162116;
+    --text: #f0f7f0;
+    --muted: #8aab8a;
+    --gold: #FFD700;
+    --gold-soft: rgba(255,215,0,0.12);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--black);
+    color: var(--text);
+    font-family: 'Inter', sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  #particles {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 2rem;
+    z-index: 1;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 70% 60% at 50% 40%, rgba(29,185,84,0.12) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .age-ring {
+    position: relative;
+    width: 200px;
+    height: 200px;
+    margin: 0 auto 2.5rem;
+  }
+
+  .age-ring svg {
+    width: 200px;
+    height: 200px;
+    transform: rotate(-90deg);
+  }
+
+  .age-ring svg circle {
+    fill: none;
+    stroke-width: 6;
+  }
+
+  .ring-track { stroke: var(--surface2); }
+  .ring-fill {
+    stroke: var(--green);
+    stroke-linecap: round;
+    stroke-dasharray: 565;
+    stroke-dashoffset: 565;
+    filter: drop-shadow(0 0 8px var(--green));
+    transition: stroke-dashoffset 2.5s cubic-bezier(.4,0,.2,1);
+  }
+
+  .age-inner {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .age-number {
+    font-family: 'Playfair Display', serif;
+    font-size: 4rem;
+    font-weight: 900;
+    color: var(--green);
+    line-height: 1;
+    text-shadow: 0 0 40px rgba(29,185,84,0.5);
+    opacity: 0;
+    transform: scale(0.7);
+    transition: opacity 0.6s 1.5s, transform 0.6s 1.5s cubic-bezier(.34,1.56,.64,1);
+  }
+
+  .age-label {
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    color: var(--muted);
+    margin-top: 2px;
+    text-transform: uppercase;
+  }
+
+  .hero-eyebrow {
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    color: var(--green);
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.3s forwards;
+  }
+
+  .hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.8rem, 7vw, 5.5rem);
+    font-weight: 900;
+    line-height: 1.08;
+    margin-bottom: 1.2rem;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.6s forwards;
+  }
+
+  .hero-title .accent {
+    color: var(--green);
+    display: block;
+    font-style: italic;
+  }
+
+  .hero-date {
+    font-size: 0.95rem;
+    color: var(--muted);
+    letter-spacing: 0.08em;
+    margin-bottom: 2.5rem;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.9s forwards;
+  }
+
+  .hero-scroll {
+    position: absolute;
+    bottom: 2.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    opacity: 0;
+    animation: fadeIn 1s 3s forwards;
+  }
+
+  .scroll-line {
+    width: 1px;
+    height: 48px;
+    background: linear-gradient(to bottom, var(--green), transparent);
+    animation: scrollPulse 1.8s infinite;
+  }
+
+  .scroll-text {
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    color: var(--muted);
+    text-transform: uppercase;
+  }
+
+  .section {
+    position: relative;
+    z-index: 1;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 5rem 2rem;
+  }
+
+  .section-label {
+    font-size: 0.72rem;
+    letter-spacing: 0.18em;
+    color: var(--green);
+    text-transform: uppercase;
+    margin-bottom: 0.6rem;
+  }
+
+  .section-heading {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 2.5rem;
+  }
+
+  .timeline {
+    position: relative;
+    padding-left: 2rem;
+  }
+
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 10px;
+    bottom: 10px;
+    width: 2px;
+    background: linear-gradient(to bottom, var(--green), transparent);
+  }
+
+  .tl-item {
+    position: relative;
+    margin-bottom: 2.2rem;
+    opacity: 0;
+    transform: translateX(-20px);
+    transition: opacity 0.6s, transform 0.6s;
+  }
+
+  .tl-item.visible {
+    opacity: 1;
+    transform: none;
+  }
+
+  .tl-dot {
+    position: absolute;
+    left: -2.45rem;
+    top: 4px;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--green);
+    box-shadow: 0 0 10px var(--green);
+    border: 2px solid var(--black);
+  }
+
+  .tl-year {
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    color: var(--green);
+    margin-bottom: 3px;
+  }
+
+  .tl-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+
+  .tl-body {
+    font-size: 0.88rem;
+    color: var(--muted);
+    line-height: 1.6;
+    max-width: 600px;
+  }
+
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+    gap: 1.2rem;
+    margin-bottom: 3rem;
+  }
+
+  .stat-card {
+    background: var(--surface2);
+    border: 1px solid rgba(29,185,84,0.2);
+    border-radius: 12px;
+    padding: 1.5rem 1.2rem;
+    text-align: center;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.5s, transform 0.5s, border-color 0.3s, box-shadow 0.3s;
+  }
+
+  .stat-card:hover {
+    border-color: var(--green);
+    box-shadow: 0 0 24px var(--green-glow);
+  }
+
+  .stat-card.visible {
+    opacity: 1;
+    transform: none;
+  }
+
+  .stat-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.2rem;
+    font-weight: 900;
+    color: var(--green);
+    display: block;
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+
+  .stat-desc {
+    font-size: 0.78rem;
+    color: var(--muted);
+    line-height: 1.4;
+  }
+
+  .msg-card {
+    background: var(--surface2);
+    border: 1px solid rgba(29,185,84,0.25);
+    border-left: 3px solid var(--green);
+    border-radius: 12px;
+    padding: 2.5rem 2rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .msg-card::before {
+    content: '\201C';
+    position: absolute;
+    top: -1rem;
+    left: 1.5rem;
+    font-family: 'Playfair Display', serif;
+    font-size: 8rem;
+    color: rgba(29,185,84,0.08);
+    line-height: 1;
+    pointer-events: none;
+  }
+
+  .msg-body {
+    font-size: 1.02rem;
+    line-height: 1.8;
+    color: var(--text);
+    margin-bottom: 1.8rem;
+    position: relative;
+  }
+
+  .msg-body p + p { margin-top: 1rem; }
+
+  .msg-sig {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .msg-sig-dot {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: var(--green);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--black);
+    flex-shrink: 0;
+  }
+
+  .msg-sig-name {
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: var(--text);
+  }
+
+  .msg-sig-role {
+    font-size: 0.75rem;
+    color: var(--muted);
+  }
+
+  .traits-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1rem;
+  }
+
+  .trait-card {
+    background: var(--surface2);
+    border: 1px solid rgba(29,185,84,0.12);
+    border-radius: 12px;
+    padding: 1.4rem;
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+    opacity: 0;
+    transform: translateY(16px);
+    transition: opacity 0.5s, transform 0.5s;
+  }
+
+  .trait-card.visible {
+    opacity: 1;
+    transform: none;
+  }
+
+  .trait-icon {
+    font-size: 1.5rem;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .trait-title {
+    font-size: 0.88rem;
+    font-weight: 600;
+    margin-bottom: 3px;
+    color: var(--text);
+  }
+
+  .trait-body {
+    font-size: 0.78rem;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+
+  .spotlight {
+    background: linear-gradient(135deg, var(--surface2), rgba(255,215,0,0.05));
+    border: 1px solid rgba(255,215,0,0.2);
+    border-radius: 16px;
+    padding: 2rem;
+    display: flex;
+    gap: 2rem;
+    align-items: flex-start;
+    flex-wrap: wrap;
+  }
+
+  .spotlight-icon {
+    font-size: 3rem;
+    flex-shrink: 0;
+  }
+
+  .spotlight-content h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--gold);
+    margin-bottom: 0.5rem;
+  }
+
+  .spotlight-content p {
+    font-size: 0.88rem;
+    color: var(--muted);
+    line-height: 1.65;
+    max-width: 540px;
+  }
+
+  .bday-footer {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    padding: 5rem 2rem 4rem;
+    overflow: hidden;
+  }
+
+  .bday-footer::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 60% 60% at 50% 100%, rgba(29,185,84,0.1) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .bday-big {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 6vw, 4rem);
+    font-weight: 900;
+    line-height: 1.1;
+    margin-bottom: 1.2rem;
+    color: var(--green);
+    text-shadow: 0 0 60px rgba(29,185,84,0.3);
+  }
+
+  .bday-sub {
+    font-size: 1rem;
+    color: var(--muted);
+    max-width: 480px;
+    margin: 0 auto 2.5rem;
+    line-height: 1.65;
+  }
+
+  .confetti-line {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    font-size: 1.8rem;
+    animation: float 2.5s ease-in-out infinite alternate;
+    margin-bottom: 3rem;
+  }
+
+  .footer-brand {
+    font-size: 0.72rem;
+    color: rgba(138,171,138,0.4);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .human-story { margin-bottom: 0.5rem; }
+
+  .human-para {
+    font-size: 0.97rem;
+    line-height: 1.85;
+    color: #c8dfc8;
+    margin-bottom: 1.1rem;
+    max-width: 680px;
+  }
+
+  .divider {
+    position: relative;
+    z-index: 1;
+    height: 1px;
+    background: linear-gradient(to right, transparent, rgba(29,185,84,0.3), transparent);
+    max-width: 700px;
+    margin: 0 auto;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: none; }
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+
+  @keyframes scrollPulse {
+    0%,100% { opacity: 0.4; transform: scaleY(1); }
+    50%      { opacity: 1;   transform: scaleY(1.1); }
+  }
+
+  @keyframes float {
+    from { transform: translateY(0); }
+    to   { transform: translateY(-8px); }
+  }
+
+  @media (max-width: 600px) {
+    .spotlight { flex-direction: column; gap: 1rem; }
+    .stats-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { animation: none !important; transition: none !important; }
+  }
+</style>
+</head>
+<body>
+
+<canvas id="particles"></canvas>
+
+<section class="hero">
+  <div class="age-ring">
+    <svg viewBox="0 0 200 200">
+      <circle class="ring-track" cx="100" cy="100" r="90"/>
+      <circle class="ring-fill" id="ringFill" cx="100" cy="100" r="90"/>
+    </svg>
+    <div class="age-inner">
+      <span class="age-number" id="ageNum">0</span>
+      <span class="age-label">years</span>
+    </div>
+  </div>
+
+  <p class="hero-eyebrow">17 · November · 2026</p>
+  <h1 class="hero-title">
+    Happy Birthday,
+    <span class="accent">Aakash Gupta</span>
+  </h1>
+  <p class="hero-date">Co-Founder &amp; CEO · Zypp Electric &nbsp;⚡</p>
+
+  <div class="hero-scroll">
+    <span class="scroll-text">scroll</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section class="section">
+  <p class="section-label">The story so far</p>
+  <h2 class="section-heading">A revolution<br>built from courage</h2>
+
+  <div class="timeline">
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <p class="tl-year">Early Years — Jaipur</p>
+      <h3 class="tl-title">Roots of a dreamer</h3>
+      <p class="tl-body">Born and raised in Jaipur, Aakash pursued engineering before earning his MBA from IMT Ghaziabad — where his fascination with entrepreneurship quietly took root alongside his coursework.</p>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <p class="tl-year">Pre-2017 — Corporate India</p>
+      <h3 class="tl-title">Dell · Airtel · Snapdeal · MobiKwik</h3>
+      <p class="tl-body">He built a decorated corporate career across four industry giants, leading marketing at MobiKwik and gaining a rare blend of fintech, e-commerce, and consumer-tech experience. And then, at the peak of it all, he walked away.</p>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <p class="tl-year">2017 — The Leap</p>
+      <h3 class="tl-title">Zypp Electric is born</h3>
+      <p class="tl-body">Together with his wife and co-founder Rashi Agarwal, Aakash saw what India's streets were becoming — polluted, chaotic, expensive — and bet everything on electric mobility for last-mile delivery. Starting with 50 scooters in Delhi-NCR.</p>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <p class="tl-year">2019 — The Pivot</p>
+      <h3 class="tl-title">B2C → B2B — finding the sweet spot</h3>
+      <p class="tl-body">The team pivoted from consumer rentals to a B2B fleet model for delivery companies, rebranding to Zypp. The move unlocked partnerships with Zomato, Swiggy, Flipkart, BigBasket, Zepto, and Blinkit.</p>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <p class="tl-year">2021 — Shark Tank India Season 1</p>
+      <h3 class="tl-title">Every shark passed. The market didn't.</h3>
+      <p class="tl-body">In one of India's most famous startup stories, the sharks declined. But Aakash proved that the market was the only judge that mattered — going on to raise $6.5 M Series A, then $25 M Series B led by Gogoro (Taiwan).</p>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <p class="tl-year">2024–2026 — Scale</p>
+      <h3 class="tl-title">India's largest EV last-mile platform</h3>
+      <p class="tl-body">Revenue crossed ₹455 crore in FY25. Fleet expanded to 22,000+ electric vehicles across Delhi-NCR, Mumbai, Bengaluru, and Hyderabad. EBITDA profitability within sight, and an IPO on the horizon.</p>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section class="section">
+  <p class="section-label">Impact in numbers</p>
+  <h2 class="section-heading">What one decision<br>can move</h2>
+
+  <div class="stats-grid">
+    <div class="stat-card"><span class="stat-num">22K+</span><span class="stat-desc">Electric vehicles on road</span></div>
+    <div class="stat-card"><span class="stat-num">₹455 Cr</span><span class="stat-desc">Revenue in FY2024–25</span></div>
+    <div class="stat-card"><span class="stat-num">50 M+</span><span class="stat-desc">Shipment deliveries via EV</span></div>
+    <div class="stat-card"><span class="stat-num">$55.5 M</span><span class="stat-desc">Total funding raised</span></div>
+    <div class="stat-card"><span class="stat-num">7.6 M</span><span class="stat-desc">Trees-worth of carbon saved</span></div>
+    <div class="stat-card"><span class="stat-num">12,000+</span><span class="stat-desc">Delivery riders empowered</span></div>
+  </div>
+
+  <div class="spotlight">
+    <div class="spotlight-icon">🦈</div>
+    <div class="spotlight-content">
+      <h3>Rejected on Shark Tank. Vindicated by the market.</h3>
+      <p>When every shark on Shark Tank India Season 1 passed on Zypp Electric's ₹2.2 crore ask, most would have wavered. Aakash doubled down. Today Zypp is widely seen as one of India's most successful EV startup stories — a testament to resilience, timing, and the courage not to need someone else's validation.</p>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section class="section">
+  <p class="section-label">The person behind the company</p>
+  <h2 class="section-heading">Not just a founder.<br>A genuinely good human being.</h2>
+
+  <div class="human-story">
+    <p class="human-para">Aakash didn't come from a family with startup capital or industry connections. He grew up in Jaipur, earned everything through hard work, built a corporate career from scratch, and when most people would have stayed comfortable, he chose the harder path. Not for glory, but because he genuinely believed in what he was building.</p>
+    <p class="human-para">The early years of Zypp were not easy. Investors said no. The EV infrastructure didn't exist. Riders were skeptical. The company pivoted once, struggled through the pandemic years, got rejected on national television, and kept going anyway. That's not resilience as a talking point — that's what it actually looks like in real life.</p>
+    <p class="human-para">What stands out about Aakash isn't the funding rounds or the revenue numbers. It's that through all of it, he stayed the same person. He still talks to riders directly. He still trusts young people with real work. He still shares his journey openly so others can learn from it. That's rare in anyone, let alone someone building at this scale.</p>
+  </div>
+
+  <div class="traits-grid" style="margin-top: 2.5rem;">
+    <div class="trait-card"><span class="trait-icon">🧍</span><div><p class="trait-title">Stayed grounded through it all</p><p class="trait-body">From 50 scooters in Delhi to 22,000 vehicles across cities — he never let the scale change who he is as a person.</p></div></div>
+    <div class="trait-card"><span class="trait-icon">🔁</span><div><p class="trait-title">Failed, adapted, kept going</p><p class="trait-body">Shark Tank rejection. Early-stage pivots. Infrastructure gaps. He faced every version of "this won't work" and found a way through it quietly.</p></div></div>
+    <div class="trait-card"><span class="trait-icon">🤝</span><div><p class="trait-title">Trusts people before they prove it</p><p class="trait-body">He gives young team members real responsibility early. That's not a management style — it's a reflection of who he is as a human.</p></div></div>
+    <div class="trait-card"><span class="trait-icon">🌱</span><div><p class="trait-title">The mission was never just business</p><p class="trait-body">Every EV on the road cuts pollution and gives a rider a better livelihood. He built a company where the purpose and the product are the same thing.</p></div></div>
+    <div class="trait-card"><span class="trait-icon">🤖</span><div><p class="trait-title">Fascinated by what's next</p><p class="trait-body">From IoT fleet management to AI-driven logistics, Aakash has always been drawn to technology that creates real-world change — not just what's trending.</p></div></div>
+    <div class="trait-card"><span class="trait-icon">📖</span><div><p class="trait-title">Shares the journey, not just the wins</p><p class="trait-body">"Kaash se Aakash" — his page exists because he believes the messy, real parts of building something are what actually help others grow.</p></div></div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section class="section">
+  <p class="section-label">A note from the team</p>
+  <h2 class="section-heading">In Pranav's words</h2>
+
+  <div class="msg-card">
+    <div class="msg-body">
+      <p>Happy Birthday, Aakash! 🎉</p>
+      <p>It has always been a privilege to be part of the program you started and to get an opportunity to make a real difference in the lives of our riders. Thank you for giving us that platform and trusting young people like us with the responsibility of creating an impact.</p>
+      <p>I'll always be grateful for everything you've given me, the opportunities, the learning, and the guidance. And I genuinely hope to keep learning and growing under your leadership in the years ahead.</p>
+      <p>I can confidently say that having a founder like you to look up to is something I'll always value. You're one of the greatest leaders and, more importantly, one of the finest human beings I've had the opportunity to know.</p>
+      <p>Wishing you good health, happiness, and many more milestones ahead. ❤️</p>
+    </div>
+    <div class="msg-sig">
+      <div class="msg-sig-dot">P</div>
+      <div>
+        <p class="msg-sig-name">Pranav Tyagi</p>
+        <p class="msg-sig-role">Zypp Electric Team</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<div class="bday-footer">
+  <div class="confetti-line">
+    <span>🎂</span><span>⚡</span><span>🌿</span><span>🏆</span><span>🎉</span>
+  </div>
+  <h2 class="bday-big">Here's to 42,<br>and everything that's next.</h2>
+  <p class="bday-sub">The road ahead is electric — literally and figuratively. Wishing India's most determined founder a year filled with health, happiness, and the kind of impact only Aakash Gupta can create.</p>
+  <p class="footer-brand">Zypp Electric &nbsp;·&nbsp; Founded 2017 &nbsp;·&nbsp; Powering India's last mile ⚡</p>
+</div>
+
+<script>
+const canvas = document.getElementById('particles');
+const ctx = canvas.getContext('2d');
+let W, H, particles = [];
+
+function resize() {
+  W = canvas.width = window.innerWidth;
+  H = canvas.height = window.innerHeight;
+}
+resize();
+window.addEventListener('resize', resize);
+
+class Particle {
+  constructor() { this.reset(true); }
+  reset(rand) {
+    this.x = Math.random() * W;
+    this.y = rand ? Math.random() * H : H + 10;
+    this.r = Math.random() * 1.5 + 0.3;
+    this.vx = (Math.random() - 0.5) * 0.3;
+    this.vy = -(Math.random() * 0.5 + 0.2);
+    this.alpha = Math.random() * 0.5 + 0.1;
+    this.color = Math.random() > 0.6 ? '#1DB954' : '#8aab8a';
+  }
+  update() {
+    this.x += this.vx;
+    this.y += this.vy;
+    if (this.y < -10) this.reset(false);
+  }
+  draw() {
+    ctx.beginPath();
+    ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2);
+    ctx.fillStyle = this.color;
+    ctx.globalAlpha = this.alpha;
+    ctx.fill();
+  }
+}
+
+for (let i = 0; i < 90; i++) particles.push(new Particle());
+
+function loop() {
+  ctx.clearRect(0, 0, W, H);
+  ctx.globalAlpha = 1;
+  particles.forEach(p => { p.update(); p.draw(); });
+  requestAnimationFrame(loop);
+}
+loop();
+
+window.addEventListener('load', () => {
+  const ring = document.getElementById('ringFill');
+  const ageNum = document.getElementById('ageNum');
+  const circumference = 2 * Math.PI * 90;
+  const fraction = 42 / 100;
+  const offset = circumference * (1 - fraction);
+
+  setTimeout(() => {
+    ring.style.strokeDashoffset = offset;
+    ageNum.style.opacity = '1';
+    ageNum.style.transform = 'scale(1)';
+  }, 500);
+
+  let count = 0;
+  setTimeout(() => {
+    const id = setInterval(() => {
+      count += 1;
+      ageNum.textContent = count;
+      if (count >= 42) clearInterval(id);
+    }, 55);
+  }, 1600);
+});
+
+const revealEls = document.querySelectorAll('.tl-item, .stat-card, .trait-card');
+const io = new IntersectionObserver((entries) => {
+  entries.forEach((e, i) => {
+    if (e.isIntersecting) {
+      setTimeout(() => e.target.classList.add('visible'), i * 80);
+      io.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.15 });
+
+revealEls.forEach(el => io.observe(el));
+</script>
+</body>
+</html>
